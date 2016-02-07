@@ -1,4 +1,4 @@
-package com.wontondon.buckets.presentation.di.modules
+package com.wontondon.buckets.ui.di.modules
 
 import android.content.Context
 import com.wontondon.buckets.BucketsApplication

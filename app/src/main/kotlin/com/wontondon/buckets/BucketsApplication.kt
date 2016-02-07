@@ -1,9 +1,9 @@
 package com.wontondon.buckets
 
 import android.app.Application
-import com.wontondon.buckets.presentation.di.components.ApplicationComponent
-import com.wontondon.buckets.presentation.di.components.DaggerApplicationComponent
-import com.wontondon.buckets.presentation.di.modules.ApplicationModule
+import com.wontondon.buckets.ui.di.components.ApplicationComponent
+import com.wontondon.buckets.ui.di.components.DaggerApplicationComponent
+import com.wontondon.buckets.ui.di.modules.ApplicationModule
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 

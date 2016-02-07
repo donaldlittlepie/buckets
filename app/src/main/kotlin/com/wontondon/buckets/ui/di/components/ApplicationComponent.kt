@@ -1,7 +1,7 @@
-package com.wontondon.buckets.presentation.di.components
+package com.wontondon.buckets.ui.di.components
 
 import android.app.Activity
-import com.wontondon.buckets.presentation.di.modules.ApplicationModule
+import com.wontondon.buckets.ui.di.modules.ApplicationModule
 import dagger.Component
 import javax.inject.Singleton
 
