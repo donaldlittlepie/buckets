@@ -15,7 +15,8 @@ class BucketsDispatcher(private val activity: Activity) : Flow.Dispatcher {
     override fun dispatch(traversal: Flow.Traversal, callback: Flow.TraversalCallback) {
         Timber.d("dispatching %s", traversal)
 
-        val destination = traversal.destination.top<Any>()
+        // FIXME explicit check? Would this ever be incorrect?
+        val destination = traversal.destination.top<Any>() as HasLayout
 
         val frame = activity.findViewById(R.id.app_container) as ViewGroup
 
@@ -26,7 +27,7 @@ class BucketsDispatcher(private val activity: Activity) : Flow.Dispatcher {
             }
         }
 
-        val layout = R.layout.screen_player_list
+        val layout = destination.getLayout()
 
         val incomingView = LayoutInflater.from(traversal.createContext(destination, activity))
             .inflate(layout, frame, false)

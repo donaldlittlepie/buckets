@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.wontondon.buckets.R
+import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Flow
 
 class MainActivity : AppCompatActivity() {
@@ -21,5 +22,10 @@ class MainActivity : AppCompatActivity() {
                 .install()
 
         super.attachBaseContext(context)
+    }
+
+    override fun onBackPressed() {
+        if (!Flow.get(this).goBack())
+            super.onBackPressed()
     }
 }
