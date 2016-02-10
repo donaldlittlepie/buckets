@@ -3,8 +3,8 @@ package com.wontondon.buckets.ui.player.list
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import com.wontondon.buckets.ui.ContextServices
 import flow.Flow
-import mortar.MortarScope
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,8 +17,7 @@ class PlayerListView : LinearLayout {
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         Timber.d("Creating PlayerListView")
-        // Flow get dagger service inject
-        Flow.getService<MortarScope>("mortar", context).getService<PlayerListScreen.Component>("dagger")
+        Flow.getService<PlayerListScreen.Component>(ContextServices.DAGGER_SERVICE, context)
                 .inject(this)
     }
 

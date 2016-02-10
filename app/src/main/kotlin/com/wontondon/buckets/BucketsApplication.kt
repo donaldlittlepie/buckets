@@ -1,6 +1,7 @@
 package com.wontondon.buckets
 
 import android.app.Application
+import com.wontondon.buckets.ui.ContextServices
 import com.wontondon.buckets.ui.di.components.DaggerApplicationComponent
 import com.wontondon.buckets.ui.di.modules.ApplicationModule
 import mortar.MortarScope
@@ -38,7 +39,7 @@ class BucketsApplication : Application() {
 
         // FIXME inject?
         this.applicationScope = MortarScope.buildRootScope()
-                .withService("dagger", component)
+                .withService(ContextServices.DAGGER_SERVICE, component)
                 .build("Root")
 
         Timber.d("Mortar root scope initialized")
