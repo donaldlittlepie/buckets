@@ -1,9 +1,9 @@
 package com.wontondon.buckets
 
 import android.app.Application
-import com.wontondon.buckets.ui.di.components.ApplicationComponent
 import com.wontondon.buckets.ui.di.components.DaggerApplicationComponent
 import com.wontondon.buckets.ui.di.modules.ApplicationModule
+import mortar.MortarScope
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -12,13 +12,12 @@ import timber.log.Timber.DebugTree
  */
 class BucketsApplication : Application() {
 
-    private lateinit var component: ApplicationComponent
-        private set
+    private lateinit  var applicationScope: MortarScope
 
     override fun onCreate() {
         super.onCreate()
         initializeLogging()
-        initializeDagger()
+        initializeMortar()
     }
 
     private fun initializeLogging() {
@@ -30,15 +29,25 @@ class BucketsApplication : Application() {
         }
     }
 
-    private fun initializeDagger() {
-        Timber.d("Initializing Dagger ApplicationComponent")
+    private fun initializeMortar() {
+        Timber.d("Initializing Mortar root scope")
 
-        this.component = DaggerApplicationComponent.builder()
+        val component = DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
 
-        Timber.d("Dagger ApplicationComponent initialized")
+        // FIXME inject?
+        this.applicationScope = MortarScope.buildRootScope()
+                .withService("dagger", component)
+                .build("Root")
+
+        Timber.d("Mortar root scope initialized")
     }
 
-
+    override fun getSystemService(name: String?): Any? {
+        return if (applicationScope.hasService(name))
+            applicationScope.getService(name)
+        else
+            super.getSystemService(name)
+    }
 }
