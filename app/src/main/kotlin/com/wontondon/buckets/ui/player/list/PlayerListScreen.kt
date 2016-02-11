@@ -1,6 +1,7 @@
 package com.wontondon.buckets.ui.player.list
 
 import com.wontondon.buckets.R
+import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.HasLayout
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.di.components.ApplicationComponent
@@ -11,7 +12,7 @@ import dagger.Component as DaggerComponent
  * @author Donnie McNeal (donnie.mcneal@gmail.com)
  */
 @Parcel
-class PlayerListScreen : HasLayout {
+class PlayerListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerComponent(dependencies = arrayOf(ApplicationComponent::class))
     @DaggerScope(PlayerListScreen::class)
@@ -19,7 +20,7 @@ class PlayerListScreen : HasLayout {
         fun inject(view: PlayerListView)
     }
 
-    fun createComponent(parent: ApplicationComponent): PlayerListScreen.Component {
+    override fun createComponent(parent: ApplicationComponent): PlayerListScreen.Component {
         return DaggerPlayerListScreen_Component.builder()
             .applicationComponent(parent)
             .build()

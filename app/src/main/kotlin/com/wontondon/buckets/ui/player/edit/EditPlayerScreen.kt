@@ -1,6 +1,7 @@
-package com.wontondon.buckets.ui.player.list
+package com.wontondon.buckets.ui.player.edit
 
 import com.wontondon.buckets.R
+import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.HasLayout
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.di.components.ApplicationComponent
@@ -11,7 +12,7 @@ import dagger.Component as DaggerComponent
  * @author Donnie McNeal (donnie.mcneal@gmail.com)
  */
 @Parcel
-class EditPlayerScreen : HasLayout {
+class EditPlayerScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerComponent(dependencies = arrayOf(ApplicationComponent::class))
     @DaggerScope(EditPlayerScreen::class)
@@ -19,7 +20,7 @@ class EditPlayerScreen : HasLayout {
         fun inject(view: EditPlayerView)
     }
 
-    fun createComponent(parent: ApplicationComponent): EditPlayerScreen.Component {
+    override fun createComponent(parent: ApplicationComponent): EditPlayerScreen.Component {
         return DaggerEditPlayerScreen_Component.builder()
             .applicationComponent(parent)
             .build()

@@ -16,6 +16,19 @@
 #   public *;
 #}
 
+# Butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
 # Parcel library
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;

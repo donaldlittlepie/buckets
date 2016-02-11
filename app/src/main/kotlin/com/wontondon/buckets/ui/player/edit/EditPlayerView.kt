@@ -1,4 +1,4 @@
-package com.wontondon.buckets.ui.player.list
+package com.wontondon.buckets.ui.player.edit
 
 import android.content.Context
 import android.util.AttributeSet

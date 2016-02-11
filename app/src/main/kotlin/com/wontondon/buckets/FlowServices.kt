@@ -1,8 +1,8 @@
 package com.wontondon.buckets
 
 import android.content.Context
+import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.ContextServices
-import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Services
 import flow.ServicesFactory
 import mortar.MortarScope
@@ -14,7 +14,7 @@ import timber.log.Timber
 class FlowServices(val context: Context) : ServicesFactory() {
 
     override fun bindServices(services: Services.Binder) {
-        val key = services.getKey<PlayerListScreen>();
+        val key = services.getKey<Any>() as ComponentFactory<Any>;
 
         val parentScope = MortarScope.getScope(context)
         val component = key.createComponent(parentScope.getService(ContextServices.DAGGER_SERVICE))
