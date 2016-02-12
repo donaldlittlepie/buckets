@@ -1,6 +1,5 @@
 package com.wontondon.buckets
 
-import android.content.Context
 import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.ContextServices
 import flow.Services
@@ -11,34 +10,38 @@ import timber.log.Timber
 /**
  * Created by donnie on 2/10/16.
  */
-class FlowServices(val context: Context) : ServicesFactory() {
+class FlowServices(private var parentScope: MortarScope) : ServicesFactory() {
 
     override fun bindServices(services: Services.Binder) {
         val key = services.getKey<Any>() as ComponentFactory<Any>;
+        Timber.d("Binding service %s", key)
 
-        val parentScope = MortarScope.getScope(context)
-        val component = key.createComponent(parentScope.getService(ContextServices.DAGGER_SERVICE))
+        var childScope = parentScope.findChild(key.javaClass.simpleName)
+        if (childScope == null) {
+            Timber.d("Creating child scope %s", key.javaClass.simpleName)
+            val component = key.createComponent(
+                    parentScope.getService(ContextServices.DAGGER_SERVICE))
 
-        val mortarScope = parentScope.buildChild()
-            .withService(ContextServices.DAGGER_SERVICE, component)
-            .build(key.javaClass.simpleName)
+            childScope = parentScope.buildChild()
+                    .withService(ContextServices.DAGGER_SERVICE, component)
+                    .build(key.javaClass.simpleName)
+        }
 
         services.bind(ContextServices.DAGGER_SERVICE,
-                mortarScope.getService(ContextServices.DAGGER_SERVICE))
+                childScope.getService(ContextServices.DAGGER_SERVICE))
     }
 
-    override fun tearDown(services: Services) {
+    override fun tearDownServices(services: Services) {
         val key = services.getKey<Any>();
         val serviceName = key.javaClass.simpleName
-        Timber.d("Tearing down flow service {}", serviceName)
+        Timber.d("Tearing down flow service %s", serviceName)
 
-        val parentScope = MortarScope.getScope(context)
         val screenScope = parentScope.findChild(key.javaClass.simpleName)
         if (screenScope != null) {
-            Timber.d("Found screen scope {}. Destroying", screenScope)
+            Timber.d("Found screen scope %s. Destroying", screenScope)
             screenScope.destroy()
         }
 
-        super.tearDown(services)
+        super.tearDownServices(services)
     }
 }

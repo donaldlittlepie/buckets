@@ -22,7 +22,7 @@ class PlayerListView : LinearLayout {
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         Timber.d("Creating PlayerListView")
         Flow.getService<PlayerListScreen.Component>(ContextServices.DAGGER_SERVICE, context)
-                .inject(this)
+                ?.inject(this)
     }
 
     @OnClick(R.id.btn_add_player)

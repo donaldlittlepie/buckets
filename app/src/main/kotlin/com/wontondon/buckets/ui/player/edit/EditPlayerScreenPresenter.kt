@@ -8,6 +8,6 @@ import javax.inject.Inject
 @DaggerScope(EditPlayerScreen::class)
 class EditPlayerScreenPresenter : ViewPresenter<EditPlayerView> {
     @Inject constructor() {
-        Timber.d("Creating {}", EditPlayerScreenPresenter::class.java.simpleName)
+        Timber.d("Creating %s", EditPlayerScreenPresenter::class.java.simpleName)
     }
 }

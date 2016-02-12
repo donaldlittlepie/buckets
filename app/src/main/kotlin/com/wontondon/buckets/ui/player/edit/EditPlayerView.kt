@@ -16,9 +16,9 @@ class EditPlayerView : LinearLayout {
     @Inject protected lateinit  var presenter: EditPlayerScreenPresenter
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
-        Timber.d("Creating {}", EditPlayerView::class.java.simpleName)
+        Timber.d("Creating %s", EditPlayerView::class.java.simpleName)
         Flow.getService<EditPlayerScreen.Component>(ContextServices.DAGGER_SERVICE, context)
-                .inject(this)
+                ?.inject(this)
     }
 
     override fun onAttachedToWindow() {

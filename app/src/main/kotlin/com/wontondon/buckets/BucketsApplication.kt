@@ -1,6 +1,7 @@
 package com.wontondon.buckets
 
 import android.app.Application
+import com.squareup.leakcanary.LeakCanary
 import com.wontondon.buckets.ui.ContextServices
 import com.wontondon.buckets.ui.di.components.DaggerApplicationComponent
 import com.wontondon.buckets.ui.di.modules.ApplicationModule
@@ -13,12 +14,17 @@ import timber.log.Timber.DebugTree
  */
 class BucketsApplication : Application() {
 
-    private lateinit  var applicationScope: MortarScope
+    private lateinit var applicationScope: MortarScope
 
     override fun onCreate() {
         super.onCreate()
-        initializeLogging()
         initializeMortar()
+        initializeLogging()
+        initializeLeakCanary()
+    }
+
+    private fun initializeLeakCanary() {
+        LeakCanary.install(this)
     }
 
     private fun initializeLogging() {

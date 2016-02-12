@@ -9,6 +9,7 @@ import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Flow
 import mortar.MortarScope
 import mortar.bundler.BundleServiceRunner
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     private val ACTIVITY_SCOPE_NAME = "Activity"
@@ -24,8 +25,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(newBase: Context?) {
+        Timber.d("On attachBaseContext")
+
         val context = Flow.configure(newBase, this)
-                .addServicesFactory(FlowServices(this))
+                .addServicesFactory(FlowServices(MortarScope.getScope(newBase)))
                 .dispatcher(BucketsDispatcher(this))
                 .defaultKey(PlayerListScreen())
                 .keyParceler(BucketsKeyParceler())
@@ -33,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         super.attachBaseContext(context)
     }
-
 
     override fun getSystemService(name: String?): Any? {
         var activityScope = getMortarScope()
