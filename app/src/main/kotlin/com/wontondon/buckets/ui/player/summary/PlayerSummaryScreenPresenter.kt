@@ -1,6 +1,8 @@
 package com.wontondon.buckets.ui.player.summary
 
 import com.wontondon.buckets.ui.di.DaggerScope
+import com.wontondon.buckets.ui.game.edit.EditGameScreen
+import flow.Flow
 import mortar.ViewPresenter
 import timber.log.Timber
 import javax.inject.Inject
@@ -11,7 +13,7 @@ class PlayerSummaryScreenPresenter : ViewPresenter<PlayerSummaryView> {
         Timber.d("Creating %s", PlayerSummaryScreenPresenter::class.java.simpleName)
     }
 
-//    fun addPlayerClicked() {
-//        Flow.get(view).set(EditPlayerScreen())
-//    }
+    fun addGameClicked() {
+        Flow.get(view).set(EditGameScreen())
+    }
 }

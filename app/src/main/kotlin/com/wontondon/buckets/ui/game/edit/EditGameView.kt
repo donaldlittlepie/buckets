@@ -1,4 +1,4 @@
-package com.wontondon.buckets.ui.player.summary
+package com.wontondon.buckets.ui.game.edit
 
 import android.content.Context
 import android.util.AttributeSet
@@ -14,26 +14,26 @@ import javax.inject.Inject
 /**
  * @author Donnie McNeal, Jr. (donnie.mcneal@gmail.com)
  */
-class PlayerSummaryView : LinearLayout {
+class EditGameView : LinearLayout {
 
-    @Inject protected lateinit  var presenter: PlayerSummaryScreenPresenter
+    @Inject protected lateinit var presenter: EditGameScreenPresenter
 
-
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
-        Timber.d("Creating PlayerListView")
-        Flow.getService<PlayerSummaryScreen.Component>(ContextServices.DAGGER_SERVICE, context)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
+        Timber.d("Creating %s", EditGameView::class.java.simpleName)
+        Flow.getService<EditGameScreen.Component>(ContextServices.DAGGER_SERVICE, context)
                 ?.inject(this)
     }
 
-    @OnClick(R.id.btn_add_game)
-    fun addGameClicked() {
-        this.presenter.addGameClicked()
+    @OnClick(R.id.btn_save)
+    fun saveClicked() {
+        this.presenter.saveClicked()
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         presenter.takeView(this)
     }
+
 
     override fun onDetachedFromWindow() {
         presenter.dropView(this)
@@ -45,3 +45,4 @@ class PlayerSummaryView : LinearLayout {
         ButterKnife.bind(this)
     }
 }
+

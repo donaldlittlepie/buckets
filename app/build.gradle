@@ -21,6 +21,10 @@ android {
         }
     }
 
+    compileOptions {
+        incremental false
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
