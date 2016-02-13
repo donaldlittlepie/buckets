@@ -1,10 +1,12 @@
 package com.wontondon.buckets
 
 import android.app.Application
+import com.crashlytics.android.Crashlytics
 import com.squareup.leakcanary.LeakCanary
 import com.wontondon.buckets.ui.ContextServices
 import com.wontondon.buckets.ui.di.components.DaggerApplicationComponent
 import com.wontondon.buckets.ui.di.modules.ApplicationModule
+import io.fabric.sdk.android.Fabric
 import mortar.MortarScope
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -31,9 +33,8 @@ class BucketsApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
-        else {
-            // Configure a production logging option (i.e. Crashlytics)
-        }
+
+        Fabric.with(this, Crashlytics())
     }
 
     private fun initializeMortar() {

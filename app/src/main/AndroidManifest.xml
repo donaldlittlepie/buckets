@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wontondon.buckets" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".BucketsApplication"
         android:allowBackup="true"
@@ -16,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="358736217d8c19f9b049ab76b6c01bdf58730a2d" />
     </application>
-
 </manifest>

@@ -1,7 +1,5 @@
-package com.wontondon.buckets
+package com.wontondon.buckets.ui
 
-import com.wontondon.buckets.ui.ComponentFactory
-import com.wontondon.buckets.ui.ContextServices
 import flow.Services
 import flow.ServicesFactory
 import mortar.MortarScope
