@@ -1,11 +1,9 @@
-package com.wontondon.buckets.ui.player.summary
+package com.wontondon.buckets.ui.game.score
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import butterknife.ButterKnife
-import butterknife.OnClick
-import com.wontondon.buckets.R
 import com.wontondon.buckets.ui.ContextServices
 import flow.Flow
 import timber.log.Timber
@@ -14,20 +12,15 @@ import javax.inject.Inject
 /**
  * @author Donnie McNeal, Jr. (donnie.mcneal@gmail.com)
  */
-class PlayerSummaryView : LinearLayout {
+class ScoreGameView : LinearLayout {
 
-    @Inject protected lateinit  var presenter: PlayerSummaryScreenPresenter
+    @Inject protected lateinit  var presenter: ScoreGamePresenter
 
 
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
-        Timber.d("Creating PlayerListView")
-        Flow.getService<PlayerSummaryScreen.Component>(ContextServices.DAGGER_SERVICE, context)
+        Timber.d("Creating %s", ScoreGameView::class.java.simpleName)
+        Flow.getService<ScoreGameScreen.Component>(ContextServices.DAGGER_SERVICE, context)
                 ?.inject(this)
-    }
-
-    @OnClick(R.id.btn_add_game)
-    fun addGameClicked() {
-        this.presenter.addGameClicked()
     }
 
     override fun onAttachedToWindow() {

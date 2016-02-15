@@ -1,4 +1,4 @@
-package com.wontondon.buckets.ui.player.summary
+package com.wontondon.buckets.ui.game.list
 
 import com.wontondon.buckets.R
 import com.wontondon.buckets.ui.ComponentFactory
@@ -12,20 +12,20 @@ import dagger.Component as DaggerComponent
  * @author Donnie McNeal (donnie.mcneal@gmail.com)
  */
 @Parcel
-class PlayerSummaryScreen : HasLayout, ComponentFactory<ApplicationComponent> {
+class GameListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerComponent(dependencies = arrayOf(ApplicationComponent::class))
-    @DaggerScope(PlayerSummaryScreen::class)
+    @DaggerScope(GameListScreen::class)
     interface Component {
-        fun inject(view: PlayerSummaryView)
+        fun inject(view: GameListView)
     }
 
-    override fun createComponent(parent: ApplicationComponent): PlayerSummaryScreen.Component {
-        return DaggerPlayerSummaryScreen_Component.builder()
+    override fun createComponent(parent: ApplicationComponent): GameListScreen.Component {
+        return DaggerGameListScreen_Component.builder()
             .applicationComponent(parent)
             .build()
     }
 
-    override fun getLayout(): Int = R.layout.screen_player_summary
+    override fun getLayout(): Int = R.layout.screen_game_list
 }
 

@@ -21,9 +21,11 @@ android {
         }
     }
 
-    compileOptions {
-        incremental false
-    }
+    // Dagger annotation processing and incrememntal builds
+    // https://github.com/google/dagger/issues/298
+//    compileOptions {
+//        incremental false
+//    }
 
     lintOptions {
         disable 'InvalidPackage'
