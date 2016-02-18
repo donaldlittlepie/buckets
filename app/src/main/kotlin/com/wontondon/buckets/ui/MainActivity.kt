@@ -3,6 +3,7 @@ package com.wontondon.buckets.ui
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import com.wontondon.buckets.R
 import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Flow
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupToolbar()
     }
 
     override fun onBackPressed() {
@@ -58,5 +60,8 @@ class MainActivity : AppCompatActivity() {
         return scope
     }
 
-
+    private fun setupToolbar() {
+        val toolbar = findViewById(R.id.app_toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+    }
 }
