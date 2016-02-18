@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.wontondon.buckets.R
 import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Flow
+import flow.KeyDispatcher
 import mortar.MortarScope
 import mortar.bundler.BundleServiceRunner
 import timber.log.Timber
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         val context = Flow.configure(newBase, this)
                 .addServicesFactory(FlowServices(MortarScope.getScope(newBase)))
-                .dispatcher(BucketsDispatcher(this))
+                .dispatcher(KeyDispatcher.configure(this, SceneDispatcher(this)).build())
                 .defaultKey(PlayerListScreen())
                 .keyParceler(BucketsKeyParceler())
                 .install()
