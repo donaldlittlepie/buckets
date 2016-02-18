@@ -20,9 +20,9 @@ class BucketsDispatcher(private val activity: Activity) : Flow.Dispatcher {
 
         val frame = activity.findViewById(R.id.app_container) as ViewGroup
 
-        traversal.origin.let {
+        traversal.origin?.let { origin ->
             if (frame.childCount > 0) {
-                traversal.origin!!.topSaveState().save(frame.getChildAt(0))
+                traversal.getState(origin.top()).save(frame.getChildAt(0))
                 frame.removeAllViews()
             }
         }
@@ -33,7 +33,7 @@ class BucketsDispatcher(private val activity: Activity) : Flow.Dispatcher {
             .inflate(layout, frame, false)
 
         frame.addView(incomingView)
-        traversal.destination.topSaveState().restore(incomingView)
+        traversal.getState(traversal.destination.top()).restore(incomingView)
 
         callback.onTraversalCompleted()
     }

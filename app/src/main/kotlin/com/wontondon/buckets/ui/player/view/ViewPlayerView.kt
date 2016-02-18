@@ -28,13 +28,13 @@ class ViewPlayerView : LinearLayout {
 
     @AnnotationHack
     @OnClick(R.id.btn_add_game)
-    fun addGameClicked_ViewPlayerView() {
+    fun addGameClicked() {
         this.presenter.addGameClicked()
     }
 
     @AnnotationHack
     @OnClick(R.id.btn_view_game_list)
-    fun vewGameListClicked_ViewPlayerView() {
+    fun vewGameListClicked() {
         this.presenter.viewGameListClicked()
     }
 

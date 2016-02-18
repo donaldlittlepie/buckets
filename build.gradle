@@ -7,8 +7,9 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-beta4'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0-rc-1036'
+        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
+//        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.1-SNAPSHOT'
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
