@@ -22,7 +22,7 @@ class EditPlayerScreen(
 ) : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerModule
-    inner class Module {
+    class EditPlayerScreenModule(val playerId: Int?) {
 
         @Provides
         @DaggerScope(EditPlayerScreen::class)
@@ -34,13 +34,14 @@ class EditPlayerScreen(
     }
 
 
-    @Subcomponent(modules = arrayOf(Module::class))
+    @Subcomponent(modules = arrayOf(EditPlayerScreenModule::class))
     @DaggerScope(EditPlayerScreen::class)
     interface EditPlayerScreenComponent {
         fun inject(view: EditPlayerView)
     }
 
-    override fun createComponent(parent: ApplicationComponent): EditPlayerScreenComponent = parent.plus(Module())
+    override fun createComponent(parent: ApplicationComponent): EditPlayerScreenComponent =
+            parent.plus(EditPlayerScreenModule(playerId))
 
     override fun getLayout(): Int = R.layout.screen_edit_player
 }

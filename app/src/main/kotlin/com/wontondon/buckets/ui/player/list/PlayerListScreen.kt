@@ -19,20 +19,20 @@ import dagger.Module as DaggerModule
 class PlayerListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerModule
-    class Module {
+    class PlayerListScreenModule {
 
         @Provides
         @DaggerScope(PlayerListScreen::class)
         fun toolbarPresenter(): ToolbarPresenter = ToolbarPresenter()
     }
 
-    @Subcomponent(modules = arrayOf(Module::class))
+    @Subcomponent(modules = arrayOf(PlayerListScreenModule::class))
     @DaggerScope(PlayerListScreen::class)
     interface PlayerListScreenComponent {
         fun inject(view: PlayerListView)
     }
 
-    override fun createComponent(parent: ApplicationComponent): PlayerListScreenComponent = parent.plus(Module())
+    override fun createComponent(parent: ApplicationComponent): PlayerListScreenComponent = parent.plus(PlayerListScreenModule())
 
     override fun getLayout(): Int = R.layout.screen_player_list
 }

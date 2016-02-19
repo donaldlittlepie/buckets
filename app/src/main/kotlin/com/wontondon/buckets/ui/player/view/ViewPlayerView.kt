@@ -19,10 +19,9 @@ class ViewPlayerView : LinearLayout {
 
     @Inject protected lateinit  var presenter: ViewPlayerScreenPresenter
 
-
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
         Timber.d("Creating %s", ViewPlayerView::class.java.simpleName)
-        Flow.getService<ViewPlayerScreen.Component>(ContextServices.DAGGER_SERVICE, context)
+        Flow.getService<ViewPlayerScreen.ViewPlayerScreenComponent>(ContextServices.DAGGER_SERVICE, context)
                 ?.inject(this)
     }
 

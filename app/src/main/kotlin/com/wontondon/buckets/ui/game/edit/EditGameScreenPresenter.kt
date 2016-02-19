@@ -1,15 +1,26 @@
 package com.wontondon.buckets.ui.game.edit
 
+import android.os.Bundle
+import com.wontondon.buckets.domain.Game
+import com.wontondon.buckets.ui.ToolbarPresenter
 import com.wontondon.buckets.ui.di.DaggerScope
 import flow.Flow
 import mortar.ViewPresenter
-import timber.log.Timber
 import javax.inject.Inject
 
 @DaggerScope(EditGameScreen::class)
-class EditGameScreenPresenter : ViewPresenter<EditGameView> {
-    @Inject constructor() {
-        Timber.d("Creating %s", EditGameScreenPresenter::class.java.simpleName)
+class EditGameScreenPresenter @Inject constructor(
+        val game: Game?,
+        val toolbarPresenter: ToolbarPresenter
+) : ViewPresenter<EditGameView>() {
+
+    override fun onLoad(savedInstanceState: Bundle?) {
+        if (game == null) {
+            toolbarPresenter.setTitle("Add Game")
+        }
+        else {
+            toolbarPresenter.setTitle("Edit Game")
+        }
     }
 
     fun saveClicked() {

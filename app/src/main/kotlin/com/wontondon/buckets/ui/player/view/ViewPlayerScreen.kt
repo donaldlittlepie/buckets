@@ -5,6 +5,8 @@ import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.HasLayout
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.di.components.ApplicationComponent
+import dagger.Module
+import dagger.Subcomponent
 import org.parceler.Parcel
 import dagger.Component as DaggerComponent
 
@@ -14,17 +16,17 @@ import dagger.Component as DaggerComponent
 @Parcel
 class ViewPlayerScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
-    @DaggerComponent(dependencies = arrayOf(ApplicationComponent::class))
+    @Module
+    class ViewPlayerScreenModule
+
+    @Subcomponent(modules = arrayOf(ViewPlayerScreenModule::class))
     @DaggerScope(ViewPlayerScreen::class)
-    interface Component {
+    interface ViewPlayerScreenComponent {
         fun inject(view: ViewPlayerView)
     }
 
-    override fun createComponent(parent: ApplicationComponent): ViewPlayerScreen.Component {
-        return DaggerViewPlayerScreen_Component.builder()
-            .applicationComponent(parent)
-            .build()
-    }
+    override fun createComponent(parent: ApplicationComponent): ViewPlayerScreenComponent =
+            parent.plus(ViewPlayerScreenModule())
 
     override fun getLayout(): Int = R.layout.screen_view_player
 }

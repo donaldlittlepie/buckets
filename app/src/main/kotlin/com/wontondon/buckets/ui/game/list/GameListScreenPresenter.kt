@@ -1,17 +1,22 @@
 package com.wontondon.buckets.ui.game.list
 
+import android.os.Bundle
+import com.wontondon.buckets.ui.ToolbarPresenter
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.game.edit.EditGameScreen
 import com.wontondon.buckets.ui.game.view.ViewGameScreen
 import flow.Flow
 import mortar.ViewPresenter
-import timber.log.Timber
 import javax.inject.Inject
 
 @DaggerScope(GameListScreen::class)
-class GameListScreenPresenter : ViewPresenter<GameListView> {
-    @Inject constructor() {
-        Timber.d("Creating %s", GameListScreenPresenter::class.java.simpleName)
+class GameListScreenPresenter @Inject constructor(
+        val toolbarPresenter: ToolbarPresenter
+) : ViewPresenter<GameListView>() {
+
+    override fun onLoad(savedInstanceState: Bundle?) {
+        super.onLoad(savedInstanceState)
+        toolbarPresenter.setTitle("View Games")
     }
 
     fun addGameClicked() {
