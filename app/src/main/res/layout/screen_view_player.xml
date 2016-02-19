@@ -17,10 +17,18 @@
             android:textSize="24dp" />
 
         <Button
-            android:id="@+id/btn_add_game"
+            android:id="@+id/btn_edit_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/screen_name"
+            android:layout_centerHorizontal="true"
+            android:text="Edit Player" />
+
+        <Button
+            android:id="@+id/btn_add_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_edit_player"
             android:layout_centerHorizontal="true"
             android:text="Add Game" />
 

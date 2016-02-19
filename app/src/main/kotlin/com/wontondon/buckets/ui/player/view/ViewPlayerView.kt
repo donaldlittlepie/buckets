@@ -38,6 +38,11 @@ class ViewPlayerView : LinearLayout {
         this.presenter.viewGameListClicked()
     }
 
+    @OnClick(R.id.btn_edit_player)
+    fun editPlayerClicked() {
+        this.presenter.onEditPlayerClicked()
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         presenter.takeView(this)

@@ -3,6 +3,7 @@ package com.wontondon.buckets.ui.player.view
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.game.edit.EditGameScreen
 import com.wontondon.buckets.ui.game.list.GameListScreen
+import com.wontondon.buckets.ui.player.edit.EditPlayerScreen
 import flow.Flow
 import mortar.ViewPresenter
 import timber.log.Timber
@@ -20,5 +21,9 @@ class ViewPlayerScreenPresenter : ViewPresenter<ViewPlayerView> {
 
     fun viewGameListClicked() {
         Flow.get(view).set(GameListScreen())
+    }
+
+    fun onEditPlayerClicked() {
+        Flow.get(view).set(EditPlayerScreen(playerId = 1))
     }
 }

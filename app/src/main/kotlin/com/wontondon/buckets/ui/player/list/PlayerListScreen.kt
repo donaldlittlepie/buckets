@@ -7,6 +7,7 @@ import com.wontondon.buckets.ui.ToolbarPresenter
 import com.wontondon.buckets.ui.di.DaggerScope
 import com.wontondon.buckets.ui.di.components.ApplicationComponent
 import dagger.Provides
+import dagger.Subcomponent
 import org.parceler.Parcel
 import dagger.Component as DaggerComponent
 import dagger.Module as DaggerModule
@@ -25,17 +26,13 @@ class PlayerListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
         fun toolbarPresenter(): ToolbarPresenter = ToolbarPresenter()
     }
 
-    @DaggerComponent(dependencies = arrayOf(ApplicationComponent::class), modules = arrayOf(Module::class))
+    @Subcomponent(modules = arrayOf(Module::class))
     @DaggerScope(PlayerListScreen::class)
-    interface Component {
+    interface PlayerListScreenComponent {
         fun inject(view: PlayerListView)
     }
 
-    override fun createComponent(parent: ApplicationComponent): PlayerListScreen.Component {
-        return DaggerPlayerListScreen_Component.builder()
-            .applicationComponent(parent)
-            .build()
-    }
+    override fun createComponent(parent: ApplicationComponent): PlayerListScreenComponent = parent.plus(Module())
 
     override fun getLayout(): Int = R.layout.screen_player_list
 }

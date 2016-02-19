@@ -1,7 +1,8 @@
 package com.wontondon.buckets.ui.di.components
 
-import android.app.Activity
 import com.wontondon.buckets.ui.di.modules.ApplicationModule
+import com.wontondon.buckets.ui.player.edit.EditPlayerScreen
+import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,5 +12,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
-    fun inject(activity: Activity)
+    fun plus(module: PlayerListScreen.Module) : PlayerListScreen.PlayerListScreenComponent
+    fun plus(module: EditPlayerScreen.Module) : EditPlayerScreen.EditPlayerScreenComponent
+
 }
