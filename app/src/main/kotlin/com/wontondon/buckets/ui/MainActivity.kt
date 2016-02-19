@@ -3,7 +3,6 @@ package com.wontondon.buckets.ui
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import com.wontondon.buckets.R
 import com.wontondon.buckets.ui.player.list.PlayerListScreen
 import flow.Flow
@@ -15,16 +14,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
     private val ACTIVITY_SCOPE_NAME = "Activity"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupToolbar()
-    }
-
-    override fun onBackPressed() {
-        if (!Flow.get(this).goBack())
-            super.onBackPressed()
-    }
+    private var toolbarPresenter: ToolbarPresenter? = null
 
     override fun attachBaseContext(newBase: Context?) {
         Timber.d("On attachBaseContext")
@@ -37,6 +27,21 @@ class MainActivity : AppCompatActivity() {
                 .install()
 
         super.attachBaseContext(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun onDestroy() {
+        this.toolbarPresenter = null
+        super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (!Flow.get(this).goBack())
+            super.onBackPressed()
     }
 
     override fun getSystemService(name: String?): Any? {
@@ -53,15 +58,11 @@ class MainActivity : AppCompatActivity() {
         if (scope == null) {
             scope = MortarScope.buildChild(applicationContext)
                     .withService(BundleServiceRunner.SERVICE_NAME, BundleServiceRunner())
-                    // .withService("dagger", createComponent()) TODO Add dagger service if needed
+//                    .withService(ContextServices.DAGGER_SERVICE, createComponent())
                     .build(ACTIVITY_SCOPE_NAME)
         }
 
         return scope
     }
 
-    private fun setupToolbar() {
-        val toolbar = findViewById(R.id.app_toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-    }
 }
