@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include
@@ -13,20 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_add_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/screen_name"
-            android:layout_centerHorizontal="true"
-            android:text="Add Player"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/player_list"
             android:scrollbars="vertical"
             android:layout_height="match_parent"
             android:layout_width="match_parent" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_add_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_add_white_24dp"
+            android:layout_marginBottom="32sp"
+            android:layout_marginEnd="32sp"
+            android:layout_marginRight="32sp"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
     </RelativeLayout>
 
 </com.wontondon.buckets.ui.player.list.PlayerListView>

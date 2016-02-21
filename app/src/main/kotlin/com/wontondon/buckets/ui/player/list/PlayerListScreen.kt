@@ -12,14 +12,20 @@ import com.wontondon.buckets.ui.di.components.ApplicationComponent
 import dagger.Provides
 import dagger.Subcomponent
 import org.parceler.Parcel
+import timber.log.Timber
 import dagger.Component as DaggerComponent
 import dagger.Module as DaggerModule
 
 /**
+ * Screen for showing a list of players.
+ *
  * @author Donnie McNeal (donnie.mcneal@gmail.com)
  */
 @Parcel
 class PlayerListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
+    init {
+        Timber.d("%s created", PlayerListScreen::class.java.simpleName)
+    }
 
     @DaggerModule
     class PlayerListScreenModule {
