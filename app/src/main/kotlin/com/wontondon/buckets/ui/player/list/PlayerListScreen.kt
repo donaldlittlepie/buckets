@@ -1,6 +1,9 @@
 package com.wontondon.buckets.ui.player.list
 
 import com.wontondon.buckets.R
+import com.wontondon.buckets.domain.Player
+import com.wontondon.buckets.domain.usecase.GetPlayerList
+import com.wontondon.buckets.domain.usecase.UseCase
 import com.wontondon.buckets.ui.ComponentFactory
 import com.wontondon.buckets.ui.HasLayout
 import com.wontondon.buckets.ui.ToolbarPresenter
@@ -20,6 +23,10 @@ class PlayerListScreen : HasLayout, ComponentFactory<ApplicationComponent> {
 
     @DaggerModule
     class PlayerListScreenModule {
+
+        @Provides
+        @DaggerScope(PlayerListScreen::class)
+        fun getPlayerListUseCase(usecase: GetPlayerList): UseCase<List<Player>> = usecase
 
         @Provides
         @DaggerScope(PlayerListScreen::class)

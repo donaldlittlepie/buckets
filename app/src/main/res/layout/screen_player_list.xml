@@ -13,14 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/screen_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Player List Screen"
-            android:textSize="24dp"/>
-
         <Button
             android:id="@+id/btn_add_player"
             android:layout_width="wrap_content"
@@ -29,13 +21,12 @@
             android:layout_centerHorizontal="true"
             android:text="Add Player"/>
 
-        <Button
-            android:id="@+id/btn_view_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_add_player"
-            android:layout_centerHorizontal="true"
-            android:text="View Player"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/player_list"
+            android:scrollbars="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+
     </RelativeLayout>
 
 </com.wontondon.buckets.ui.player.list.PlayerListView>
